@@ -11,13 +11,13 @@ public class UserDaoJDBCImpl implements UserDao {
 
     // SQL запросы
     private final String SQL_CREATE_TABLE = """
-        CREATE TABLE IF NOT EXISTS users (
-            id BIGINT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(50) NOT NULL,
-            last_name VARCHAR(50) NOT NULL,
-            age TINYINT NOT NULL
-        )
-        """;
+            CREATE TABLE IF NOT EXISTS users (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(50) NOT NULL,
+                last_name VARCHAR(50) NOT NULL,
+                age TINYINT NOT NULL
+            )
+            """;
 
     private final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS users";
     private final String SQL_INSERT = "INSERT INTO users (name, last_name, age) VALUES (?, ?, ?)";
