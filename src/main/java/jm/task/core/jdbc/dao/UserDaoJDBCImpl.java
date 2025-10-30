@@ -25,7 +25,7 @@ public class UserDaoJDBCImpl implements UserDao {
     private final String SQL_SELECT_ALL = "SELECT * FROM users";
     private final String SQL_CLEAN_TABLE = "DELETE FROM users";
 
-    private Connection connection;
+    private final Connection connection;
 
     public UserDaoJDBCImpl() {
         this.connection = Util.getConnection();
@@ -83,8 +83,8 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
 
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_ALL);
+             ResultSet resultSet = preparedStatement.executeQuery(SQL_SELECT_ALL)) {
 
             while (resultSet.next()) {
                 User user = new User();
