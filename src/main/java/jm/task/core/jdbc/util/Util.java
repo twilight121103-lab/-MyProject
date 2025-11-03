@@ -9,6 +9,7 @@ public class Util {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "Timur_2003";
     private static Connection connection = null;
+
     public static Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
