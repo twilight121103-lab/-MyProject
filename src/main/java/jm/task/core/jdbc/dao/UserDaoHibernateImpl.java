@@ -59,8 +59,12 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            User user = new User(name, lastName, age);
-            session.save(user);
+            String sql = "INSERT into users(name, last_name, age) values(?, ?, ?)";
+            session.createNativeQuery(sql)
+                    .setParameter(1, name)
+                    .setParameter(2, lastName)
+                    .setParameter(3, age)
+                    .executeUpdate();
             transaction.commit();
             System.out.println("User с именем – " + name + " добавлен в базу данных");
 
@@ -75,8 +79,8 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            String hql = "DELETE FROM User WHERE id = :userId";
-            int deletedCount = session.createQuery(hql)
+            String sql = "DELETE FROM User S WHERE id = :userId";
+            int deletedCount = session.createQuery(sql)
                     .setParameter("userId", id)
                     .executeUpdate();
 
