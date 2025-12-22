@@ -31,12 +31,12 @@ public class UserServiceImpl implements UserService {
     public User findByID(Long id) {
         return userDao.findByID(id);
     }
-
+    @Transactional
     @Override
     public void update(User user) {
         userDao.update(user);
     }
-
+    @Transactional
     @Override
     public void delete(Long id) {
         userDao.delete(id);

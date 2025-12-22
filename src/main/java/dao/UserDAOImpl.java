@@ -25,13 +25,11 @@ public class UserDAOImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void update(User user) {
         entityManager.merge(user);
     }
 
     @Override
-    @Transactional
     public void delete(Long id) {
         User user = findByID(id);
         if (user != null) {
@@ -41,7 +39,7 @@ public class UserDAOImpl implements UserDao {
 
     @Override
     public List<User> listUsers() {
-        return entityManager.createNamedQuery("User.listAll", User.class)
+        return entityManager.createQuery("SELECT u FROM User u", User.class)
                 .getResultList();
 
     }
