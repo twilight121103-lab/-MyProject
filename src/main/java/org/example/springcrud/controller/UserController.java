@@ -50,13 +50,14 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public String update(@ModelAttribute("user") User user) {
+    public String update(@RequestParam("id") long id, @ModelAttribute("user") User user) {
+        user.setId(id);
         userService.update(user);
         return "redirect:/users";
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam("id") long id, Model model) {
+    public String delete(@RequestParam("id") long id) {
         userService.delete(id);
         return "redirect:/users";
     }

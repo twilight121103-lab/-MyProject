@@ -26,7 +26,12 @@ public class UserDAOImpl implements UserDao {
 
     @Override
     public void update(User user) {
-        entityManager.merge(user);
+        entityManager.createQuery("UPDATE User u SET u.firstName = :name, u.lastName = :lastName, u.email = :email WHERE u.id = :id")
+                .setParameter("name", user.getFirstName())
+                .setParameter("lastName", user.getLastName())
+                .setParameter("email", user.getEmail())
+                .setParameter("id", user.getId())
+                .executeUpdate();
     }
 
     @Override

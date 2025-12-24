@@ -1,7 +1,6 @@
 package org.example.springcrud.service;
 
 
-
 import org.example.springcrud.dao.UserDao;
 import org.example.springcrud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +32,13 @@ public class UserServiceImpl implements UserService {
     public User findByID(Long id) {
         return userDao.findByID(id);
     }
+
     @Transactional
     @Override
     public void update(User user) {
         userDao.update(user);
     }
+
     @Transactional
     @Override
     public void delete(Long id) {
