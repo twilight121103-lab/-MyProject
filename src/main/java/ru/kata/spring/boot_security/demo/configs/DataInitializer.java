@@ -35,12 +35,18 @@ public class DataInitializer {
         adminRole.setName("ROLE_ADMIN");
         roleRepository.save(adminRole);
         User admin = new User();
+        admin.setFirstName("Admin");
+        admin.setAge(23);
+        admin.setLastName("Admin");
         admin.setUsername("admin@example.com");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRoles(Set.of(adminRole, userRole));
         userRepository.save(admin);
 
         User user = new User();
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setAge(22);
         user.setUsername("user@example.com");
         user.setPassword(passwordEncoder.encode("user"));
         user.setRoles(Set.of(userRole));
