@@ -1,0 +1,34 @@
+package ru.kata.spring.boot_security.demo.controllers;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class MainController {
+
+    @GetMapping("/")
+    public String home() {
+        return "index";
+    }
+
+    @GetMapping("/index")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/user")
+    public String userPage(@AuthenticationPrincipal UserDetails userDetails,
+                           Model model) {
+        model.addAttribute("user", userDetails);
+        return "user";
+
+    }
+}

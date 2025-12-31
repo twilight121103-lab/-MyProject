@@ -16,6 +16,10 @@
         <span th:if="${!stat.last}">, </span>
     </span>
 </div>
+<a th:href="@{/admin/edit?id={id}(id=${user.getId()})}">Edit</a>
+<form th:method="POST" th:action="@{/admin/delete?id={id}(id=${user.getId()})}">
+    <input type="submit" value="Delete user"/>
+</form>
 <form action="/logout" method="post">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <button type="submit">Выйти</button>
