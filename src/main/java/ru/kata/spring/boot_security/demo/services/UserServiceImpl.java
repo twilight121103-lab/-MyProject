@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findUserWithRolesByUsername(username);
+    }
+
+    @Override
     public List<User> listUsers() {
         return userRepository.findAll();
     }

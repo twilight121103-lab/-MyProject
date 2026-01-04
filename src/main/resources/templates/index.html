@@ -1,12 +1,58 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:insert="~{base :: layout(~{::title}, ~{::main})}">
 <head>
-    <title>Spring Security Example</title>
+    <title>Главная страница</title>
 </head>
 <body>
-<h1>Welcome to Index PAGE!</h1>
+<main th:fragment="main">
+    <!-- Герой-секция -->
+    <div class="text-center py-5 mb-5 bg-light rounded">
+        <h1 class="display-4 mb-3">
+            <i class="bi bi-shield-check text-primary"></i>
+            Spring Security Demo
+        </h1>
+        <p class="lead mb-4">
+            Демонстрация работы Spring Security с ролями пользователей
+        </p>
 
+        <!-- Кнопки для разных состояний -->
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}" class="btn btn-primary btn-lg me-2">
+                <i class="bi bi-box-arrow-in-right me-1"></i>Войти в систему
+            </a>
+        </div>
 
-</body>
-</html>
+        <div sec:authorize="isAuthenticated()">
+            <div sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin}" class="btn btn-primary btn-lg me-2">
+                    <i class="bi bi-gear-wide-connected me-1"></i>Панель администратора
+                </a>
+            </div>
+            <a th:href="@{/user}" class="btn btn-outline-primary btn-lg me-2">
+                <i class="bi bi-person-circle me-1"></i>Мой профиль
+            </a>
+        </div>
+    </div>
+
+    <!-- Карточки возможностей -->
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-shield-lock display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Безопасность</h5>
+                    <p class="card-text">
+                        Защита endpoints с использованием ролей и прав доступа
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-people display-4 text-success mb-3"></i>
+                    <h5 class="card-title">Управление пользователями</h5>
+                    <p class>

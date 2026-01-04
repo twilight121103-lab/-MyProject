@@ -5,9 +5,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.services.UserServiceImpl;
 
 @Controller
 public class MainController {
+    private final UserServiceImpl userService;
+
+    public MainController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/")
     public String home() {
@@ -25,10 +32,9 @@ public class MainController {
     }
 
     @GetMapping("/user")
-    public String userPage(@AuthenticationPrincipal UserDetails userDetails,
-                           Model model) {
-        model.addAttribute("user", userDetails);
+    public String userPage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User user = userService.findUserByUsername(userDetails.getUsername());
+        model.addAttribute("user", user);
         return "user";
-
     }
 }
